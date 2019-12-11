@@ -86,7 +86,7 @@ def minimum_steps_to_intersect(intersects1, intersects2):
     return steps
 
 
-f = open("Input3.txt")
+f = open("Input03.txt")
 
 input = f.readlines()
 f.close()

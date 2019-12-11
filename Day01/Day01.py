@@ -12,7 +12,7 @@ def fuel(mass):
 
 
 
-f = open("Input1.txt")
+f = open("Input01.txt")
 
 fuels = []
 for l in f.readlines():

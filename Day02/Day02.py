@@ -30,7 +30,7 @@ def find_inputs_for_value(value):
                 return noun, verb
 
 
-f = open("Input2.txt")
+f = open("Input02.txt")
 
 input_string = f.read()
 f.close()

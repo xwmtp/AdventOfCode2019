@@ -3,7 +3,7 @@
 from Intcode_computer import Intcode_computer
 
 
-f = open("Input5.txt")
+f = open("Input05.txt")
 
 program_string = f.read()
 f.close()
