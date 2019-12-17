@@ -1,7 +1,7 @@
 # https://adventofcode.com/2019/day/11
 
 from Intcode_computer import Intcode_computer
-from Robot import Robot
+from Droid import Robot
 
 
 def run_robot(robot, intcode):
