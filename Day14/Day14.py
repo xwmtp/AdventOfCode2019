@@ -1,14 +1,13 @@
 # https://adventofcode.com/2019/day/14
 
+from Chem_calculator import Chem_calculator
+import sys
+
 f = open("Input14.txt")
 
 inputs = f.read().splitlines()
 f.close()
 
-print(inputs)
-
-
-#inputs = ['157 ORE => 5 NZVS', '165 ORE => 6 DCFZ', '44 XJWVT, 5 KHKGT, 1 QDVJ, 29 NZVS, 9 GPVTF, 48 HKGWZ => 1 FUEL', '12 HKGWZ, 1 GPVTF, 8 PSHF => 9 QDVJ', '179 ORE => 7 PSHF', '177 ORE => 5 HKGWZ', '7 DCFZ, 7 PSHF => 2 XJWVT', '165 ORE => 2 GPVTF', '3 DCFZ, 7 NZVS, 5 HKGWZ, 10 PSHF => 8 KHKGT']
 
 def chem_tuple(string):
     num, chem = string.split(' ')
@@ -19,39 +18,51 @@ for rule in inputs:
     chem_inputs, chem_output = rule.split(' => ')
     chem_inputs = [chem_tuple(chem) for chem in chem_inputs.split(', ')]
     chem_output, chem_output_num = chem_tuple(chem_output)
-    rules[chem_output] = (chem_output_num, chem_inputs)
-
-print(rules)
-
-
-class Chem_calculator:
-
-    def __init__(self, rules):
-        self.rules = rules
-
-    def ore_required(self):
-        list = self.rules['FUEL']
-
-
-        self.fulfill_requirements(inputs, dict())
-
-
-
-    def fulfill_requirements(self, chem_tuples_needed, chem_tuples_own):
-        for needed, chem in chem_tuples_needed:
-            amount, inputs = self.rules[chem]
-            if 
+    rules[chem_output] = (chem_output_num, dict(chem_inputs))
 
 
 
 
-    def tuple_lookup(self, tuples, c):
-        for num, chem in tuples:
-            if chem == c:
-                return num
 
-
+# --- Part 1 ---
 
 calculator = Chem_calculator(rules)
-#calculator.ore_required()
+ores = Chem_calculator.ore_required(calculator)
+print(ores)
+
+
+
+# --- Part 2 ---
+
+def binary_search(func, l, r, x):
+    """Find a value 'mid' for which func(mid) is closest to x, but still smaller than x."""
+    min_diff = sys.maxsize
+    min_mid = 0
+
+    while l <= r:
+        mid = l + (r-l)//2
+
+        found = func(mid)
+        diff = abs(found - x)
+        if found < x and diff < min_diff:
+            min_diff = diff
+            min_mid = mid
+
+        if found == x:
+            return mid
+        elif found < x:
+            l = mid + 1
+        else:
+            r = mid - 1
+
+    return min_mid
+
+def max_fuel(calculator, ores = int(1e12)):
+    return binary_search(calculator.ore_required, 0, int(1e10), ores)
+
+
+ores = calculator.ore_required(fuel = 100)
+print(max_fuel(calculator))
+
+
 
